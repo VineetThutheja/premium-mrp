@@ -11,6 +11,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource("/category",CategoryController::class);
 Route::apiResource("/unit",UnitController::class);
+Route::apiResource("/brand",BrandController::class);
 
 Route::get("/migrate",function(){
     $artisan = Artisan::call("migrate");
