@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\TaxController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -13,6 +14,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource("/category",CategoryController::class);
 Route::apiResource("/unit",UnitController::class);
 Route::apiResource("/brand",BrandController::class);
+Route::apiResource("/tax",TaxController::class);
 
 Route::get("/migrate",function(){
     $artisan = Artisan::call("migrate");
