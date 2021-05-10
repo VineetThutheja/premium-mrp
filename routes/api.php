@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\TaxController;
+use App\Http\Controllers\ContactController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -15,6 +16,7 @@ Route::apiResource("/category",CategoryController::class);
 Route::apiResource("/unit",UnitController::class);
 Route::apiResource("/brand",BrandController::class);
 Route::apiResource("/tax",TaxController::class);
+Route::apiResource("/contact",ContactController::class);
 
 Route::get("/migrate",function(){
     $artisan = Artisan::call("migrate");
