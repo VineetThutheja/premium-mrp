@@ -23,3 +23,9 @@ Route::get("/migrate",function(){
     $output = Artisan::output();
     return $output;
 });
+
+Route::get("/migrate/refresh",function(){
+    $artisan = Artisan::call("migrate:refresh");
+    $output = Artisan::output();
+    return $output;
+});
