@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
-class BrandController extends ApiController
+class ContactController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class BrandController extends ApiController
      */
     public function index()
     {
-        $brands = Brand::all();
-        return $this->showAll($brands);
+        $contacts = Contact::all();
+        return $this->showAll($contacts);
     }
 
     /**
@@ -37,53 +37,52 @@ class BrandController extends ApiController
     public function store(Request $request)
     {
         try {
-            $brand = new Brand;
-            $brand::create($request->all());
-            return response()->json(["success"=>true,"message"=>"Brand created suucessfully"]);
+            $contact = new Contact;
+            $contact::create($request->all());
+            return response()->json(["success"=>true,"message"=>"Contact created suucessfully"]);
 
         } catch (\Throwable $th) {
             throw $th;
         }
-        
-
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Brand  $brand
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(Brand $brand)
+    public function show(Contact $contact)
     {
-        //
+       
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Brand  $brand
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit(Brand $brand)
+    public function edit(Contact $contact)
     {
-        //
+        $contact = Contact::findOrFail($contact->id);
+        return $this->showOne($contact,200);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Brand  $brand
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
+    public function update(Request $request, Contact $contact)
     {
         try {
-            $brand = Brand::findOrFail($brand->id);
-            $brand->update($request->all());
-            return response()->json(["success"=>true,"message"=>"Brand updated suucessfully"]);
+            $contact = Contact::findOrFail($contact->id);
+            $contact->update($request->all());
+            return response()->json(["success"=>true,"message"=>"Contact updated suucessfully"]);
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -92,10 +91,10 @@ class BrandController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Brand  $brand
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $brand)
+    public function destroy(Contact $contact)
     {
         //
     }
