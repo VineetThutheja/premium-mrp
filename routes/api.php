@@ -18,14 +18,12 @@ Route::apiResource("/unit",UnitController::class);
 Route::apiResource("/brand",BrandController::class);
 Route::apiResource("/tax",TaxController::class);
 Route::apiResource("/contact",ContactController::class);
-Route::apiResource("/product-type",ProductTypeController::class);
-
+Route::apiResource("/productType",ProductTypeController::class);
 Route::get("/migrate",function(){
     $artisan = Artisan::call("migrate");
     $output = Artisan::output();
     return $output;
 });
-
 Route::get("/migrate/refresh",function(){
     $artisan = Artisan::call("migrate:refresh");
     $output = Artisan::output();
