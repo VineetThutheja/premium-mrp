@@ -78,7 +78,7 @@ class ProductTypeController extends ApiController
     public function update(Request $request, ProductType $productType)
     {
         try {
-            $productType = ProductType::findOrFail($brand->id);
+            $productType = ProductType::findOrFail($productType->id);
             $productType->update($request->all());
             return response()->json(["success"=>true,"message"=>"Product type updated suucessfully"]);
         } catch (\Throwable $th) {
