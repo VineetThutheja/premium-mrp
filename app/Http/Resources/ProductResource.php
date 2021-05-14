@@ -24,7 +24,7 @@ class ProductResource extends JsonResource
             "category"=>empty($this->categoryId)?"":$this->category->category,
             "taxId"=>$this->taxId,
             "tax"=>empty($this->taxId)?"":$this->tax->tax,
-            "taxRate"=>empty($this->taxId)?"":$this->tax->taxRate,
+            "taxRate"=>empty($this->taxId)?"":$this->tax->tax_rate,
             "brandId"=>$this->brandId,
             "brand"=>empty($this->brandId)?"":$this->brand->brand,
             "productTypeId"=>$this->productTypeId,
