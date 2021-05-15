@@ -33,6 +33,7 @@ class ProductResource extends JsonResource
             "primaryUnit"=>empty($this->primaryUnitId)?"":$this->primaryUnit->unit,
             "secondaryUnitId"=>$this->secondaryUnitId,
             "secondaryUnitValue"=>empty($this->secondaryUnitId)?"":$this->secondaryUnitValue->unit,
+            "secondaryUnit"=>$this->secondaryUnit,
             "description"=>$this->description
         ];
     }
