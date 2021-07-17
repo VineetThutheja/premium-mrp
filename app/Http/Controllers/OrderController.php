@@ -35,7 +35,16 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $order = new Order;
+            $order = $order::create($request->all());
+            $order->saveMany($request->orderedProducts);
+            return response()->json(["success"=>true,"message"=>"Order created suucessfully"]);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+        
     }
 
     /**
