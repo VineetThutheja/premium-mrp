@@ -38,7 +38,7 @@ class OrderController extends Controller
         try {
             $order = new Order;
             $order = $order::create($request->all());
-            $order->orderDetails()->saveMany($request->orderedProducts);
+            $order->orderDetails()->saveMany($request->get('orderedProducts'));
             return response()->json(["success"=>true,"message"=>"Order created suucessfully"]);
 
         } catch (\Throwable $th) {
