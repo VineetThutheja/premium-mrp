@@ -11,9 +11,15 @@ class Order extends Model
     protected $fillable = ["referenceNo","orderDate","quotationNo","supplierId","branchId","subtotal","totalTax","total","discountType","discount","discountAmount","purchaseTaxId","purchaseTax","shippingDetails","shippingCharges","purchaseTotal","additionalDetails"];
 
 
-    public function orderDetails(Type $var = null)
+    public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class,"orderId");
     }
+
+    public function contact()
+    {
+        return $this->belongsTo(Supplier::class,"contactId");
+    }
+    
 
 }

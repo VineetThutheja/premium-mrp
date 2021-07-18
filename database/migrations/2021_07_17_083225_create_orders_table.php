@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string("referenceNo");
             $table->string("orderDate");
             $table->string("quotationNo");
-            $table->integer("supplierId");
+            $table->integer("contactId");
             $table->integer("branchId")->nullable();
             $table->float("subtotal")->default(0.00);
             $table->float("totalTax")->default(0.00);
