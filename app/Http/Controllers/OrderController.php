@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Http\Resources\OrderResource;
+
 class OrderController extends Controller
 {
     /**
@@ -79,7 +81,24 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        try {
+            $order = Order::findOrFail($order->id);
+            $order->update($request->all());
+            $orderDetails = $this->crudPartition($order->orderDetails,$request->orderedProducts);
+            $order->orderDetails()->createMany($orderDetails["create"]);
+            $order->orderDetails()->whereIn('id', $orderDetails["delete"]->pluck("id"))->delete();
+            foreach($orderDetails["update"] as $orderDetail){
+                $order->orderDetails()->where('id', $orderDetail["id"])->update($orderDetail);
+                
+            }
+
+            return response()->json(["success"=>true,"message"=>"Order created suucessfully"]);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+        
+       
     }
 
     /**
@@ -92,4 +111,31 @@ class OrderController extends Controller
     {
         //
     }
+
+    function crudPartition($oldData, $newData)
+{
+    
+    $oldIds = json_decode(json_encode(collect($oldData)->pluck("id"),true));
+    $newIds =json_decode(json_encode(collect($newData)->pluck("id"),true));
+   
+    // groups
+    $delete = collect($oldData)
+        ->filter(function ($model) use ($newIds) {
+            return !in_array($model["id"], $newIds);
+        });
+
+    $update = collect($newData)
+        ->filter(function ($model) use ($oldIds) {
+            return array_key_exists("id",$model) && in_array($model["id"], $oldIds);
+        });
+ 
+    $create = collect($newData)
+        ->filter(function ($model) use ($oldIds) {
+            return !(array_key_exists("id",$model) && in_array($model["id"], $oldIds));
+        });
+
+    
+    return compact('delete', 'update', 'create');
+}
+
 }
