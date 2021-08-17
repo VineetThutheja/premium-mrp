@@ -17,7 +17,7 @@ class OrderDetailResource extends JsonResource
         $orderDetail = parent::toArray($request);
         $orderDetail["productName"] = $this->product->productName; 
         $orderDetail["tax"] = $this->tax->tax; 
-        $orderDetail["tax_rate"] = $this->tax->tax_rate; 
+        $orderDetail["taxRate"] = $this->tax->tax_rate; 
         $orderDetail["primaryUnit"] = empty($this->primaryUnitId)?"":$this->primaryUnit->unit;
         $orderDetail["secondaryUnitValue"]= empty($this->secondaryUnitId)?"":$this->secondaryUnitValue->unit;
         return $orderDetail;
