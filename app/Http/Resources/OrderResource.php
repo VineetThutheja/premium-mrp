@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use App\Http\Resources\OrderDetailResource;
 class OrderResource extends JsonResource
 {
     /**
@@ -16,7 +16,7 @@ class OrderResource extends JsonResource
     {
         $order = parent::toArray($request);
         $order["businessName"] = $this->contact->buisnessName;
-
+        $order["orderedProducts"] = OrderDetailResource::collection($this->orderDetails);
         return $order;
     }
 }
