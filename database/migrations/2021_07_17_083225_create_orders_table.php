@@ -27,11 +27,11 @@ class CreateOrdersTable extends Migration
             $table->string("discountType")->nullable();
             $table->float("discount")->nullable();
             $table->float("discountAmount")->nullable();
-            $table->integer("purchaseTaxId")->nullable();
-            $table->float("purchaseTax")->default(0.00);
+            $table->integer("orderTaxId")->nullable();
+            $table->float("orderTax")->default(0.00);
             $table->string("shippingDetails")->nullable();
             $table->float("shippingCharges")->default(0.00);
-            $table->float("purchaseTotal")->default(0.00);
+            $table->float("orderTotal")->default(0.00);
             $table->string("additionalDetails")->nullable();
             $table->timestamps();
         });
