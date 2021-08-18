@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string("referenceNo");
             $table->string("orderDate");
+            $table->string("orderType")->nullable();
             $table->string("quotationNo");
             $table->integer("contactId");
             $table->integer("branchId")->nullable();

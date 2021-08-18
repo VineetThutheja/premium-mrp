@@ -39,8 +39,16 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         try {
+            $orderData = $request->all();
+            $orderCount = Order::where("orderDate",$orderData["orderDate"])->where("orderType",$orderData["orderType"])->get()->count();
+            if($orderData["orderType"]=="PURCHASE"){
+                $orderData["referenceNo"] = "PO-".str_replace("-","",$orderData["orderDate"])."-".sprintf("%'.03d", $orderCount+1);
+            }elseif($orderData["orderType"]=="SALE"){
+                $orderData["referenceNo"] = "SO-".str_replace("-","",$orderData["orderDate"])."-".sprintf("%'.03d", $orderCount+1);
+
+            }
             $order = new Order;
-            $order = $order::create($request->all());
+            $order = $order::create($orderData);
             $order->orderDetails()->createMany($request->get('orderedProducts'));
             return response()->json(["success"=>true,"message"=>"Order created suucessfully"]);
 
