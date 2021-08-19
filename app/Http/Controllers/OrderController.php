@@ -14,9 +14,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = OrderResource::collection(Order::all());
+        $orders = OrderResource::collection(Order::where("orderType",$request["type"])->get());
         return ["data"=>$orders];
     }
 
